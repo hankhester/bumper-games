@@ -72,15 +72,29 @@ export default class GameEngine {
     }
   }
 
-  addDisplayObject(object: DisplayObject) {
+  removePiece(piece: Piece | Octogon): void {
+    if (piece instanceof Octogon) {
+      piece.walls.forEach((wall: Wall) => this.removePiece(wall));
+    } else {
+      this.pieces = this.pieces.splice(this.pieces.indexOf(piece), 1)
+      this.world.removeBody(piece.body);
+      this.removeDisplayObject(piece.graphics);
+    }
+  }
+
+  addDisplayObject(object: DisplayObject): void {
     this.app.stage.addChild(object);
   }
 
-  stop() {
+  removeDisplayObject(object: DisplayObject): void {
+    this.app.stage.removeChild(object);
+  }
+
+  stop(): void {
     this.app.ticker.stop()
   }
 
-  static updateGraphics(piece: Piece) {
+  static updateGraphics(piece: Piece): void {
     piece.graphics.x = piece.body.position[0];
     piece.graphics.y = piece.body.position[1];
     piece.graphics.rotation = piece.body.angle;

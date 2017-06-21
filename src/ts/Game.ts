@@ -22,6 +22,12 @@ export default class Game {
 
   constructor(gameEngine: GameEngine) {
     this.gameEngine = gameEngine;
+    this.initPieces();
+    this.initScores();
+    this.initEventHandlers();
+  }
+
+  initPieces() {
     this.home = new Ship(425, 300, Ship.HOME_COLOR);
     this.away = new Ship(165, 300, Ship.AWAY_COLOR);
     this.puck = new Puck(300, 300, new Color('white'));
@@ -30,6 +36,11 @@ export default class Game {
     this.gameEngine.addPiece(this.home);
     this.gameEngine.addPiece(this.away);
     this.gameEngine.addPiece(this.puck);
+  }
+
+  initScores() {
+    this.homeTimeMS = 0;
+    this.awayTimeMS = 0;
 
     this.homeScore = new Text('0.0', {
       fontFamily: ['Avenir', 'Helvetica', 'sans-serif'],
@@ -45,15 +56,15 @@ export default class Game {
     this.awayScore.position = new Point(30, 30)
     this.gameEngine.addDisplayObject(this.homeScore);
     this.gameEngine.addDisplayObject(this.awayScore);
+  }
 
-    this.homeTimeMS = 0;
-    this.awayTimeMS = 0;
-
+  initEventHandlers() {
     this.gameEngine.onTick = this.handleTick.bind(this);
     this.gameEngine.onCollision = this.handleCollision.bind(this);
 
     document.addEventListener('keydown', this.handleKeyDown.bind(this))
     document.addEventListener('keyup', this.handleKeyUp.bind(this))
+    document.getElementById('restart-button').addEventListener('click', this.restart.bind(this));
   }
 
   handleCollision(event) {
@@ -139,6 +150,15 @@ export default class Game {
     let s: string = num.toString();
     if (s.indexOf('.') === -1) return s + '.0';
     return s;
+  }
+
+  restart() {
+    this.gameEngine.removePiece(this.home);
+    this.gameEngine.removePiece(this.away);
+    this.gameEngine.removePiece(this.puck);
+    this.initPieces();
+    this.homeTime = 0;
+    this.awayTime = 0;
   }
 
   handleKeyDown(event: KeyboardEvent): void {
