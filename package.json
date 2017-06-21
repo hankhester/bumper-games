@@ -1,12 +1,13 @@
 {
   "name": "bumper2",
   "version": "1.0.0",
-  "description": "",
+  "description": "A TypeScript implementation of a space-hockey game for UNC's COMP110 class.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp"
   },
-  "author": "",
+  "author": "Hank Hester",
   "license": "ISC",
   "dependencies": {
     "@types/p2": "^0.7.30",
