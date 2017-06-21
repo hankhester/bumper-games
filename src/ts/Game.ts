@@ -17,6 +17,8 @@ export default class Game {
   awayScore: Text;
   possession: Ship;
   puck: Puck;
+  homeWinsMessage: Text
+  awayWinsMessage: Text
 
   static MAX_SECONDS: number = 30;
 
@@ -56,6 +58,23 @@ export default class Game {
     this.awayScore.position = new Point(30, 30)
     this.gameEngine.addDisplayObject(this.homeScore);
     this.gameEngine.addDisplayObject(this.awayScore);
+
+    this.homeWinsMessage = new Text('Game Over\nRight team wins!', {
+      align: 'center',
+      fontFamily: ['Avenir', 'Helvetica', 'sans-serif'],
+      fontSize: 40,
+      fill: this.home.color.toNumber(),
+      stroke: 'black',
+      strokeThickness: 3
+    });
+    this.awayWinsMessage = new Text('Game Over\nLeft team wins!', {
+      align: 'center',
+      fontFamily: ['Avenir', 'Helvetica', 'sans-serif'],
+      fontSize: 40,
+      fill: this.away.color.toNumber(),
+      stroke: 'black',
+      strokeThickness: 3
+    });
   }
 
   initEventHandlers() {
@@ -103,23 +122,9 @@ export default class Game {
     if (this.awayTime >= maxMS || this.homeTime >= maxMS) {
       let message: Text;
       if (this.possession === this.home) {
-        message = new Text('Game Over\nRight team wins!', {
-          align: 'center',
-          fontFamily: ['Avenir', 'Helvetica', 'sans-serif'],
-          fontSize: 40,
-          fill: this.home.color.toNumber(),
-          stroke: 'black',
-          strokeThickness: 3
-        })
+        message = this.homeWinsMessage;
       } else if (this.possession === this.away) {
-        message = new Text('Game Over\nLeft team wins!', {
-          align: 'center',
-          fontFamily: ['Avenir', 'Helvetica', 'sans-serif'],
-          fontSize: 40,
-          fill: this.away.color.toNumber(),
-          stroke: 'black',
-          strokeThickness: 3
-        })
+        message = this.awayWinsMessage;
       }
       message.position = new Point(300 - message.width / 2, 300 - message.height / 2);
       this.gameEngine.addDisplayObject(message);
@@ -156,6 +161,9 @@ export default class Game {
     this.gameEngine.removePiece(this.home);
     this.gameEngine.removePiece(this.away);
     this.gameEngine.removePiece(this.puck);
+    this.gameEngine.removeDisplayObject(this.homeWinsMessage);
+    this.gameEngine.removeDisplayObject(this.awayWinsMessage);
+    this.gameEngine.start();
     this.initPieces();
     this.homeTime = 0;
     this.awayTime = 0;

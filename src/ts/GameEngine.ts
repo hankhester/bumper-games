@@ -93,6 +93,10 @@ export default class GameEngine {
   stop(): void {
     this.app.ticker.stop()
   }
+  
+  start(): void {
+    this.app.ticker.start();
+  }
 
   static updateGraphics(piece: Piece): void {
     piece.graphics.x = piece.body.position[0];
