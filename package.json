@@ -1,0 +1,27 @@
+{
+  "name": "bumper2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/p2": "^0.7.30",
+    "@types/pixi.js": "^4.5.0",
+    "@types/tinycolor2": "^1.1.1",
+    "browser-sync": "^2.18.12",
+    "browserify": "^14.4.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-typescript": "^3.1.7",
+    "p2": "^0.7.1",
+    "pixi.js": "^4.5.3",
+    "tinycolor2": "^1.4.1",
+    "tsify": "^3.0.1",
+    "typescript": "^2.3.4",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
