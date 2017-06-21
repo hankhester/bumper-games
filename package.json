@@ -9,7 +9,7 @@
   },
   "author": "Hank Hester",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "@types/p2": "^0.7.30",
     "@types/pixi.js": "^4.5.0",
     "@types/tinycolor2": "^1.1.1",
