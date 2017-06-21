@@ -1,0 +1,19 @@
+button {
+  background: white;
+  border-radius: 5px;
+  width: 80px;
+  height: 35px;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  text-decoration: none;
+  font-family: 'Avenir' sans-serif;
+  position: fixed;
+  left: 270px;
+  top: 15px;
+  transition: transform 80ms ease-in-out; }
+  button:focus {
+    outline: 0; }
+  button:active {
+    background: #ccc;
+    transform: scale(0.97); }
